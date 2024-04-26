@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
   const [lastWorkDate, setLastWorkDate] = useState(new Date());
@@ -42,45 +39,48 @@ function App() {
   };
 
   return (
-    <div>
-      <div>
-        <label>
-          Последний рабочий день
-          <input type="date" value={lastWorkDate} onChange={(e) => setLastWorkDate(e.target.value)} />
-        </label>
+    <>
+      <img src='./bant.png'></img>
+      <div className='flex-container'>
+        <div className='flex-container__item'>
+          <label>
+            Последний рабочий день
+            <input type="date" value={lastWorkDate} onChange={(e) => setLastWorkDate(e.target.value)} />
+          </label>
+        </div>
+        <h3>Желаемые даты</h3>
+        <div className="flex-container__item">
+          <label>
+            Первая дата
+            <input type="date" value={firstWishDate} onChange={(e) => setFirstWishDate(e.target.value)} />
+          </label>
+          <label>
+            Вторая дата
+            <input type="date" value={secondWishDate} onChange={(e) => setSecondWishDate(e.target.value)} />
+          </label>
+        </div>
+        <div className="flex-container__item">
+          <button onClick={onClickHandler}>Узнать</button>
+        </div>
+        <div className="result">
+          {showResult && (
+            <>
+              <div className="result__item">
+                {isFirstChill ?
+                  `Ура! У тебя выходной ${(new Date(firstWishDate)).toLocaleDateString('ru-RU')}`
+                  : `К сожалению ты работаешь ${(new Date(firstWishDate)).toLocaleDateString('ru-RU')}`}
+              </div>
+              <div className="result__item">
+                {isSecondChill ?
+                  `Ура! У тебя выходной ${(new Date(secondWishDate)).toLocaleDateString('ru-RU')}`
+                  : `К сожалению ты работаешь ${(new Date(secondWishDate)).toLocaleDateString('ru-RU')}`}
+              </div>  
+            </>
+          )}
+        </div>
       </div>
-      Желаемые даты
-      <div className="flex-container">
-        <label>
-          Первая дата
-          <input type="date" value={firstWishDate} onChange={(e) => setFirstWishDate(e.target.value)} />
-        </label>
-        <label>
-          Вторая дата
-          <input type="date" value={secondWishDate} onChange={(e) => setSecondWishDate(e.target.value)} />
-        </label>
-      </div>
-      <div>
-        <button onClick={onClickHandler}>Узнать</button>
-      </div>
-      <div className="flex-container">
-        {showResult && (
-          <>
-            <div>
-              {isFirstChill ?
-                `Ура! У тебя выходной ${(new Date(firstWishDate)).toLocaleDateString('ru-RU')}`
-                : `К сожалению ты работаешь ${(new Date(firstWishDate)).toLocaleDateString('ru-RU')}`}
-            </div>
-            <div>
-              {isSecondChill ?
-                `Ура! У тебя выходной ${(new Date(secondWishDate)).toLocaleDateString('ru-RU')}`
-                : `К сожалению ты работаешь ${(new Date(secondWishDate)).toLocaleDateString('ru-RU')}`}
-            </div>  
-          </>
-        )}
-      </div>
-    </div>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;
